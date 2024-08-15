@@ -22,3 +22,5 @@ In Xnat Web, go to Administer > Site Admininistration in the top navigation and 
 
 You can find .vm file at: BLANKPluginXNAT-main\src\main\resources\META-INF\resources\templates\screens\QuickSearch_update.vm
  Open it and change BLANK to the target Datatype
+
+ # If download and package the plugin into a JAR file directly, you will get a new data type called 'BLANK'
