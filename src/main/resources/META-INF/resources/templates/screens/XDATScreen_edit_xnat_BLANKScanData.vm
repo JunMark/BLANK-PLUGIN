@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+$page.setTitle("XDAT")
+$page.setLinkColor($ui.alink)
+$page.setVlinkColor($ui.vlink)
+ ##---------------------------------------- 
+ ## DO NOT MODIFY THIS FILE HERE
+ ##
+ ## TO MODIFY, COPY THIS FILE to src/main/resources/templates/screens/ and modify it there 
+ ##----------------------------------------
+#set($months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
+#set($days = [ 1..31 ])
+#set($years = [ $!turbineUtils.getYear()..1900])
+#if ($data.message)
+<font color="red" size="3">$data.message</font>
+#end
+<p>
+<form ID="form1" name="form1" method="post" action="$link.setAction("ModifyItem")">
+<input type="hidden" name="project" value="$!{project}" >
+#if($vr)
+	<font color="red">Invalid parameters:<BR>$vr.toHTML()</font>
+<HR>
+#end
+
+<TABLE width="100%">
+	<TR>
+		<TD>
+			<table width="100%">
+				<TR>
+					<TD align="left" valign="middle">
+						<DIV class="edit_title">fnirsScan Details</DIV>
+					</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+			<TABLE width="100%">
+				<TR>
+					<TD valign="top">
+						<TABLE>
+							<TR><TD>image_session_ID</TD><TD>#xdatStringBox("fnirs:fnirsScanData/image_session_ID" $item "" $vr)</TD></TR>
+							<TR><TD>note</TD><TD>#xdatStringBox("fnirs:fnirsScanData/note" $item "" $vr)</TD></TR>
+							<TR><TD>quality</TD><TD>#xdatStringBox("fnirs:fnirsScanData/quality" $item "" $vr)</TD></TR>
+							<TR><TD>condition</TD><TD>#xdatStringBox("fnirs:fnirsScanData/condition" $item "" $vr)</TD></TR>
+							<TR><TD>series_description</TD><TD>#xdatStringBox("fnirs:fnirsScanData/series_description" $item "" $vr)</TD></TR>
+							<TR><TD>series_class</TD><TD>#xdatStringBox("fnirs:fnirsScanData/series_class" $item "" $vr)</TD></TR>
+							<TR><TD>documentation</TD><TD>#xdatStringBox("fnirs:fnirsScanData/documentation" $item "" $vr)</TD></TR>
+							<TR><TD>scanner</TD><TD>#xdatStringBox("fnirs:fnirsScanData/scanner" $item "" $vr)</TD></TR>
+							<TR><TD>scanner/manufacturer</TD><TD>#xdatStringBox("fnirs:fnirsScanData/scanner/manufacturer" $item "" $vr)</TD></TR>
+							<TR><TD>scanner/model</TD><TD>#xdatStringBox("fnirs:fnirsScanData/scanner/model" $item "" $vr)</TD></TR>
+							<TR><TD>scanner/softwareVersion</TD><TD>#xdatStringBox("fnirs:fnirsScanData/scanner/softwareVersion" $item "" $vr)</TD></TR>
+							<TR><TD>modality</TD><TD>#xdatStringBox("fnirs:fnirsScanData/modality" $item "" $vr)</TD></TR>
+							<TR><TD>frames</TD><TD>#xdatTextBox("fnirs:fnirsScanData/frames" $item "" $vr)</TD></TR>
+							<TR><TD>operator</TD><TD>#xdatStringBox("fnirs:fnirsScanData/operator" $item "" $vr)</TD></TR>
+							<TR><TD>startTime</TD><TD>#xdatTextBox("fnirs:fnirsScanData/startTime" $item "" $vr)</TD></TR>
+							<TR><TD>start_date</TD><TD>#xdatDateBox("fnirs:fnirsScanData/start_date" $item $vr $years)</TD></TR>
+							<TR><TD>requestedProcedureDescription</TD><TD>#xdatStringBox("fnirs:fnirsScanData/requestedProcedureDescription" $item "" $vr)</TD></TR>
+							<TR><TD>protocolName</TD><TD>#xdatStringBox("fnirs:fnirsScanData/protocolName" $item "" $vr)</TD></TR>
+							<TR><TD>bodyPartExamined</TD><TD>#xdatStringBox("fnirs:fnirsScanData/bodyPartExamined" $item "" $vr)</TD></TR>
+							<TR><TD>ID</TD><TD>#xdatStringBox("fnirs:fnirsScanData/ID" $item "" $vr)</TD></TR>
+							<TR><TD>type</TD><TD>#xdatStringBox("fnirs:fnirsScanData/type" $item "" $vr)</TD></TR>
+							<TR><TD>UID</TD><TD>#xdatStringBox("fnirs:fnirsScanData/UID" $item "" $vr)</TD></TR>
+							<TR><TD>project</TD><TD>#xdatStringBox("fnirs:fnirsScanData/project" $item "" $vr)</TD></TR>
+													#xdatHiddenBox("fnirs:fnirsScanData/xnat_imageScanData_id" $item "")
+							<TR><TD>task</TD><TD>#xdatStringBox("fnirs:fnirsScanData/task" $item "" $vr)</TD></TR>
+						</TABLE>
+					</TD>
+				</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+<!-- BEGIN fnirs:fnirsScanData -->
+			<TABLE>
+				<TR><TH align="left"><font face="$ui.sansSerifFonts" size="2">Related Items</font></TH></TR>
+<!-- BEGIN fnirs:fnirsScanData/sharing/share -->
+				<TR><TH align="left"><BR><font face="$ui.sansSerifFonts" size="2">fnirs:fnirsScanData/sharing/share</font></TH></TR>
+				<TR>
+					<TD align="left" valign="top">
+						<TABLE>
+							<TR>
+								<TD>share</TD>
+								<TD>label</TD>
+								<TD>project</TD>
+							</TR>
+							#foreach($xnat_imageScanData_share_1_COUNTER in [0..5])
+								<TR>
+									<TD>#xdatTextBox("fnirs:fnirsScanData/sharing/share[$xnat_imageScanData_share_1_COUNTER]/share" $item "" $vr)</TD>
+									<TD>#xdatTextBox("fnirs:fnirsScanData/sharing/share[$xnat_imageScanData_share_1_COUNTER]/label" $item "" $vr)</TD>
+									<TD>#xdatTextBox("fnirs:fnirsScanData/sharing/share[$xnat_imageScanData_share_1_COUNTER]/project" $item "" $vr)</TD>
+									#xdatHiddenBox("fnirs:fnirsScanData/sharing/share[$xnat_imageScanData_share_1_COUNTER]/xnat_imageScanData_share_id" $item "")
+								</TR>
+							#end
+						</TABLE>
+					</TD>
+				</TR>
+<!-- END fnirs:fnirsScanData/sharing/share -->
+				<TR>
+					<TD align="left" valign="top">
+						<TABLE><TR><TD>
+							#foreach($xnat_abstractResource_1_COUNTER in [0..5])
+<!-- BEGIN fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER] -->
+								<TABLE>
+									<TR><TH align="left"><BR><font face="$ui.sansSerifFonts" size="2">fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]</font></TH></TR>
+									<TR>
+										<TD align="left" valign="top">
+											<TABLE>
+												<TR><TD>note</TD><TD>#xdatStringBox("fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/note" $item "" $vr)</TD></TR>
+												<TR><TD>label</TD><TD>#xdatStringBox("fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/label" $item "" $vr)</TD></TR>
+												<TR><TD>file_count</TD><TD>#xdatTextBox("fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/file_count" $item "" $vr)</TD></TR>
+												<TR><TD>file_size</TD><TD>#xdatTextBox("fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/file_size" $item "" $vr)</TD></TR>
+																		#xdatHiddenBox("fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/xnat_abstractResource_id" $item "")
+											</TABLE>
+										</TD>
+									</TR>
+<!-- BEGIN fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/tags/tag -->
+									<TR><TH align="left"><BR><font face="$ui.sansSerifFonts" size="2">fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/tags/tag</font></TH></TR>
+									<TR>
+										<TD align="left" valign="top">
+											<TABLE>
+												<TR>
+													<TD>tag</TD>
+													<TD>name</TD>
+												</TR>
+												#foreach($xnat_abstractResource_tag_2_COUNTER in [0..5])
+													<TR>
+														<TD>#xdatTextBox("fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/tags/tag[$xnat_abstractResource_tag_2_COUNTER]/tag" $item "" $vr)</TD>
+														<TD>#xdatTextBox("fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/tags/tag[$xnat_abstractResource_tag_2_COUNTER]/name" $item "" $vr)</TD>
+														#xdatHiddenBox("fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/tags/tag[$xnat_abstractResource_tag_2_COUNTER]/xnat_abstractResource_tag_id" $item "")
+													</TR>
+												#end
+											</TABLE>
+										</TD>
+									</TR>
+<!-- END fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER]/tags/tag -->
+								</TABLE>
+<!-- END fnirs:fnirsScanData/file[$xnat_abstractResource_1_COUNTER] -->
+							#end
+						</TD></TR></TABLE>
+					</TD>
+				</TR>
+				<TR>
+					<TD align="left" valign="top">
+<!-- BEGIN fnirs:fnirsScanData/validation -->
+						<TABLE>
+							<TR><TH align="left"><BR><font face="$ui.sansSerifFonts" size="2">fnirs:fnirsScanData/validation</font></TH></TR>
+							<TR>
+								<TD align="left" valign="top">
+									<TABLE>
+										<TR><TD>method</TD><TD>#xdatStringBox("fnirs:fnirsScanData/validation/method" $item "" $vr)</TD></TR>
+										<TR><TD>date</TD><TD>#xdatDateBox("fnirs:fnirsScanData/validation/date" $item $vr $years)</TD></TR>
+										<TR><TD>notes</TD><TD>#xdatStringBox("fnirs:fnirsScanData/validation/notes" $item "" $vr)</TD></TR>
+										<TR><TD>validated_by</TD><TD>#xdatStringBox("fnirs:fnirsScanData/validation/validated_by" $item "" $vr)</TD></TR>
+										<TR><TD>status</TD><TD>#xdatStringBox("fnirs:fnirsScanData/validation/status" $item "" $vr)</TD></TR>
+																#xdatHiddenBox("fnirs:fnirsScanData/validation/xnat_validationData_id" $item "")
+									</TABLE>
+								</TD>
+							</TR>
+						</TABLE>
+<!-- END fnirs:fnirsScanData/validation -->
+					</TD>
+				</TR>
+			</TABLE>
+<!-- END fnirs:fnirsScanData -->
+		</TD>
+	</TR>
+	<TR>
+		<TD>
+		#xdatEditProps($item $edit_screen)
+		<TR><TD COLSPAN=2 ALIGN=left><input type="button" ONCLICK="validateForm();"  name="eventSubmit_doInsert" value="Submit"/></TD></TR>
+		</TD>
+	</TR>
+</TABLE>
+</form>
+
+<script type="text/javascript">
+function validateForm()
+{
+   //INSERT CUSTOM CONTENT HERE
+}
+</script>

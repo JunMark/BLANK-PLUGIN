@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://nrg.wustl.edu/BLANK" 
+           xmlns:BLANK="http://nrg.wustl.edu/BLANK"
+           xmlns:xnat="http://nrg.wustl.edu/xnat"
+           xmlns:xdat="http://nrg.wustl.edu/xdat"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+    <xs:import namespace="http://nrg.wustl.edu/xnat" schemaLocation="../xnat/xnat.xsd"/>
+
+    <xs:element name="BLANKSession" type="BLANK:BLANKSessionData"/>  // define the datatype
+    <xs:element name="BLANKScan" type="BLANK:BLANKScanData"/>
+    
+
+    <xs:complexType name="BLANKSessionData">  // define session data
+        <xs:annotation>
+            <xs:documentation>An event in which BLANK scans are obtained on a subject</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="xnat:imageSessionData">
+                <xs:sequence minOccurs="0">
+
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="BLANKScanData">   // define scan data
+        <xs:complexContent>
+            <xs:extension base="xnat:imageScanData">
+                <xs:sequence minOccurs="0">
+<!--                    #Task info-->
+                    <xs:element name="task" type="xs:string" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>What kind of task was being done e.g. recollection, motion, taking</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+</xs:schema>
